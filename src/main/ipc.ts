@@ -27,6 +27,17 @@ export function registerIpcHandlers(): void {
   ipcMain.on(IPC.SET_TRAY_STATUS, (_event, status: unknown) => {
     if (typeof status === 'string' && (TRAY_STATUSES as readonly string[]).includes(status)) {
       updateTrayStatus(status as TrayStatus);
+      // Incoming call while hidden to tray: surface the window ourselves
+      // (without stealing focus) instead of relying on OS toasts — Windows
+      // suppresses toasts from apps lacking Start-menu registration (e.g.
+      // unpackaged runs), which would leave the agent with ringtone only.
+      if (status === 'ringing') {
+        const win = getMainWindow();
+        if (win && !win.isDestroyed() && !win.isVisible()) {
+          win.showInactive();
+          win.flashFrame(true);
+        }
+      }
     }
   });
 
