@@ -1,0 +1,57 @@
+appId: com.affilync.desktop
+productName: Affilync
+copyright: Copyright © 2026 Affilync
+
+directories:
+  output: release
+  buildResources: resources
+
+files:
+  - dist/**/*
+  - resources/**/*
+  - package.json
+
+protocols:
+  - name: Affilync
+    schemes:
+      - affilync
+
+publish:
+  provider: github
+  owner: moneyflowz367
+  repo: affilync-desktop
+
+win:
+  target:
+    - nsis
+  icon: resources/icon.png
+
+nsis:
+  oneClick: true
+  perMachine: false # per-user install: no admin prompt, auto-update works
+  runAfterFinish: true
+  createStartMenuShortcut: true # required for Windows toast attribution
+
+mac:
+  target:
+    - dmg
+    - zip # REQUIRED for electron-updater on macOS
+  icon: resources/icon.png
+  category: public.app-category.business
+  # Mic usage string is required for getUserMedia even before signing lands.
+  extendInfo:
+    NSMicrophoneUsageDescription: >-
+      Affilync needs microphone access so call-center agents can take calls
+      with the built-in softphone.
+  hardenedRuntime: false # flip to true when Developer ID signing is enabled
+
+linux:
+  target:
+    - AppImage
+    - deb
+  icon: resources/icon.png
+  category: Office
+  synopsis: Affilync call-center softphone and brand dashboard
+
+# Notarization stub stays disabled until an Apple Developer ID exists
+# (see scripts/notarize.js + README signing runbook).
