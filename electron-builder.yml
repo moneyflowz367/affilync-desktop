@@ -18,7 +18,7 @@ protocols:
 
 publish:
   provider: github
-  owner: moneyflowz367
+  owner: affilync
   repo: affilync-desktop
 
 win:

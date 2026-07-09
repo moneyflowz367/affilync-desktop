@@ -17,7 +17,7 @@ this shell only changes when native behavior changes.
 
 ## Install
 
-Download the latest release from [Releases](https://github.com/moneyflowz367/affilync-desktop/releases):
+Download the latest release from [Releases](https://github.com/affilync/affilync-desktop/releases):
 
 | Platform | File | Notes |
 |---|---|---|
